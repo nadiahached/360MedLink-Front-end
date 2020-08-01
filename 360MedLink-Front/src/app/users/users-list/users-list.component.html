@@ -1,0 +1,327 @@
+<div [hidden]="hidden">
+
+  <ngx-loading [show]="loading"></ngx-loading>
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <section id="filter" class="shadow p-3 mb-5 bg-white rounded py-1">
+      <div class="container">
+        <div class="blockquote text-center text-muted">
+          Vous pouvez filtrer les utilisateurs selon leur nom
+        </div>
+        <div class="d-flex bd-highlight mb-3">
+          <div class="p-2 bd-highlight">
+            <input [(ngModel)]="userName" type="text" class="form-control" placeholder="nom" (keyup.enter)="findUsers()">
+          </div>
+          <div class="p-2 bd-highlight">
+            <div class="row">
+              <button type="button" class="btn btn-light" (click)="findUsers()">
+                <i class="fa fa-search"></i>
+              </button>
+              <button type="button" class="btn btn-light"  data-toggle="modal" data-target="#AddUser" style="margin-left: 10px"
+                      (click)="initAddUser()">
+                <i class="fa fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="ml-auto p-2 bd-highlight">
+              <button type="button" class="btn btn-warning" [routerLink]="['roles']">Gérer les rôles</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <!--navbar-->
+
+  <div class="container " >
+    <div class="row">
+      <!-- boucle for -->
+      <div class="col-lg-3 col-md-6 col-12"  *ngFor="let user of users | paginate: { itemsPerPage: 8, currentPage: pageNumber }">
+        <div>
+        <div class="card shadow-sm p-3 mb-4  rounded" style="background-color: gainsboro">
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-light" title="suprimer ce utlisateur"
+
+                    data-toggle="modal" attr.data-target="#delete-{{user.id}}">
+              <i class="fas fa-window-close" style="color:red"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <img src="../../../assets/avatar.jpg" class="card-img-top mb-2 rounded" alt="delice" height="130" width="130">
+            <h5 class="text-center">Nom: {{user?.firstName}}</h5>
+            <div class="text-center">Prénom: {{user?.secondeName}}</div>
+            <div class="text-center">Manager: {{user?.managerName}}</div>
+
+          </div>
+          <div class=" d-flex justify-content-center py-3">
+            <!-- add to cart -->
+            <form>
+              <div class="text-center font-weight-bold mt-1 mb-2 h5 text-danger">Titre:{{user.titre}}</div>
+              <button type="submit" class="btn btn-sm btn-danger "
+                      data-toggle="modal"
+                      attr.data-target="#userDetail-{{user.id}}">
+                Détails <i class="fas fa-info"></i>
+              </button>
+              <button type="submit" class="btn btn-sm btn-success"[routerLink]="['update',user?.id]">
+                Update <i class="fas fa-pen-alt"></i>
+              </button>
+              <button type="submit" class="btn btn-sm btn btn-dark"[routerLink]="['salary',user?.id]">
+                Salary <i class="fas fa-pen-alt"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!--======  ======= MODEL ===================-->
+
+        <div class="modal fade" id="userDetail-{{user.id}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Détails de cet utilisateur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <table class="table">
+                <thead>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td> Nom</td>
+                  <td> {{user?.firstName}} </td>
+                </tr>
+                <tr>
+                  <td> Prénom</td>
+                  <td> {{user?.secondeName}} </td>
+                </tr>
+                <tr>
+                  <td> Nom du Manager</td>
+                  <td> {{user?.managerName}} </td>
+                </tr>
+                <tr>
+                  <td> Mot de passe </td>
+                  <td> {{user?.publicPassword}} </td>
+                </tr>
+                <tr>
+                  <td> Date de naissance </td>
+                  <td> {{user?.birthday}} </td>
+                </tr>
+                <tr>
+                  <td> Adresse </td>
+                  <td> {{user?.adresse}} </td>
+                </tr>
+                <tr>
+                  <td> Titre </td>
+                  <td> {{user?.titre}} </td>
+                </tr>
+                <tr>
+                  <td> Salaire </td>
+                  <td> {{user?.salaire}} </td>
+                </tr>
+                <tr>
+                  <td> Cin </td>
+                  <td> {{user?.cin}} </td>
+                </tr>
+                <tr>
+                  <td> Rib </td>
+                  <td> {{user?.rib}} </td>
+                </tr>
+                <tr>
+                  <td> Solde </td>
+                  <td> {{user?.solde}} </td>
+                </tr>
+                <tr>
+                  <td> Contrat </td>
+                  <td> {{user?.cota}} </td>
+                </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+
+          <!--delete bill-->
+          <div class="modal fade" id="delete-{{user.id}}" tabindex="-1" role="dialog"
+               aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete this Bill</h5>
+                  <!-- Boosted mod: using visually hidden text instead of aria-label -->
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span class="sr-only">Close live modal demo</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Voulez-vous vraiment supprimer cet utilisateur
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  <button type="button" class="btn btn-danger"(click)="onDeleteUser(user?.id)">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--delete modal finish-->
+
+        <!--==============MODEL ===================-->
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <!-- AddUser Form -->
+  <div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="SignInFromTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form   [formGroup]="UserForm" (ngSubmit)="onAddUser()" >
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="SignInFromTitle">Ajouter un employé</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-lg-6">
+                <label> Adresse E-mail </label>
+                <input type="email"
+                       name="Nom"
+                       formControlName="email"
+                       class="form-control"
+                       id="email"
+                       placeholder="Saisir le nom">
+              </div>
+              <div class="col-lg-6">
+                <label>  Nom </label>
+                <input type="text"
+                       name="Nom"
+                       formControlName="firstName"
+                       class="form-control"
+                       id="firstName"
+                       placeholder="Saisir le nom">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label> Prénom </label>
+                <input type="text"
+                       id="secondeName"
+                       name="Prénom"
+                       formControlName="secondeName"
+                       class="form-control"
+                       placeholder="Saisir le prénom">
+              </div>
+              <div class="col-lg-6">
+                <label > Choisir le manager : </label>
+
+                <select formControlName="managerName" class="form-control" id="managerName">
+                  <option value="" disabled selected>nom du manager</option>
+                  <option *ngFor="let manager of managers"  value="{{manager.firstName}}">{{manager.firstName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <br>
+                <label>birthday</label>
+                <input  class="form-control"
+                        type="date"
+                        required="required"
+                        formControlName="birthday" class="form-control"  id="birthday">
+              </div>
+              <div class="col-lg-6">
+                <br>
+                <label >Mot de passe</label>
+                <input type="text"formControlName="password" class="form-control"  id="password"
+                       placeholder="Saisir le password de l'utilisateur">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <br>
+                <label >Cin</label>
+                <input type="text" id="cin"formControlName="cin" class="form-control" placeholder="Saisir le cin">
+              </div>
+              <div class="col-lg-6">
+                <br>
+                <label > Rib : </label>
+                <input type="text" formControlName="rib" id="rib" class="form-control" placeholder="Saisir le rib">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <br>
+                <label> Salaire </label>
+                <input type="text"  formControlName="salaire"id="salaire" class="form-control" placeholder="salaire">
+              </div>
+              <div class="col-lg-6">
+                <br>
+                <label >Titre</label>
+                <select formControlName="titre" class="form-control" id="titre"  placeholder="Saisir le titre du l'employe">
+                  <option value="" disabled selected>Titre</option>
+                  <option value="USER">USER</option>
+                  <option value="MANAGER">MANAGER</option>
+                  <option value="RH">RH</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <br>
+                <label >Adresse Exacte</label>
+                <input type="text" id="adresse"formControlName="adresse" class="form-control" placeholder="Saisir l'adresse exacte">
+              </div>
+              <div class="col-lg-6">
+                <br>
+                <label >Contact</label>
+                <input type="text"formControlName="contact" class="form-control"  id="contact"
+                       placeholder="Saisir le contact">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <br>
+                <select formControlName="cota" class="form-control" id="cota">
+                  <option value="" disabled selected>Type de contract</option>
+                  <option value="1.75">SIVP</option>
+                  <option value="1.5">CVP</option>
+                  <option value="1.5">CDI</option>
+                </select>
+              </div>
+              <div class="col-lg-6">
+              </div>
+            </div>
+            <br>
+            <button class="btn btn-primary btn-block "type="submit"
+                    [disabled]="UserForm.invalid">Valider</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <!-- pagination -->
+  <div class="d-flex justify-content-center">
+    <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+  </div>
+  <!--end pagination-->
+
+</div>
+<router-outlet></router-outlet>

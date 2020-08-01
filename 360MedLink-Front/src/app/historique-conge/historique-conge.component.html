@@ -1,0 +1,129 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<!-- Bienvenue -->
+<section id="bienvenue" class="py-3">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="text-center">
+        <h3 class="display-3 pt-5">Votre historique de congé</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="d-flex bd-highlight" style="background-color:  rgba(61, 65, 66, 0.8)">
+  <div class="p-2 flex-grow-1 bd-highlight"></div>
+  <div class="p-2 bd-highlight">
+    <button type="button" class="btn btn-success"data-toggle="modal"style="margin-right: 75px"
+            data-target="#AddConge" (click)="initAddConge()"[disabled]="user.solde<1">Demander un congé</button>
+  </div>
+  <div class="p-2 bd-highlight"></div>
+</div>
+
+
+
+
+
+
+<div class="bg-light" style="height: 100%" >
+  <!-- ====================== Carte ========================-->
+  <div id="carte" class=" page-content container py-3">
+    <div class="row">
+      <div class="col-lg-9 col-md-12 order-1">
+        <div class="d-flex justify-content-around"*ngIf="conges.length===0" >
+          <div  class="container"style=" margin-right: 10%; margin-left: 10%;">
+            <div class="alert alert-dark" role="alert">
+              <span class="alert-icon"><span class="sr-only">Info</span></span>
+              <div>
+                <h4 class="alert-heading">Notification.</h4>
+                <p> Pas de congé pour le  moments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card shadow-sm" *ngIf="conges?.length!=0">
+          <table class="table table-stripped">
+            <thead class="thead-light">
+            <th scope="col">Date du Début</th>
+            <th scope="col">Nombre de jours</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Manager</th>
+            <th scope="col">Etat</th>
+            </thead>
+            <tbody *ngFor="let conge of conges" >
+            <tr >
+              <td scope="row">{{conge.debutTime}}</td>
+              <td scope="row">{{conge.breJours}}</td>
+              <td scope="row">{{conge.firstName}}</td>
+              <td scope="row">{{conge.secondeName}}</td>
+              <td scope="row">{{conge.titre}}</td>
+              <td scope="row">{{conge.managerName}}</td>
+              <td scope="row">
+                <p *ngIf="conge.status==='En attente'" style="color: orangered">{{conge.status}}</p>
+                <p *ngIf="conge.status==='Approuvé'" style="color: green">{{conge.status}}</p>
+                <p *ngIf="conge.status==='Annulé'" style="color: red">{{conge.status}}</p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 col-md-12 order-lg-1">
+        <div class="panier card shadow-sm">
+          <div class="card-header h5">Votre solde de congé</div>
+          <div class="card-body text-danger text-center">
+            <h5 class="card-title h1">{{user?.solde}} Jours</h5>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+<!-- AddConge Form -->
+<div class="modal fade" id="AddConge" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form   [formGroup]="CongeForm" (ngSubmit)="onAddConge()" >
+        <div class="modal-header">
+
+          <h5 class="modal-title" id="SignInFromTitle">Ajouter un salaire</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <br>
+              <label>Date de debut </label>
+              <input  class="form-control"
+                      type="date"
+                      required="required"
+                      formControlName="debutTime" class="form-control"  id="debutTime">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <br>
+              <label >nombre de jours </label>
+              <input type="text" id="breJours"formControlName="breJours" class="form-control" placeholder="nombre de jours de congé">
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-primary btn-block "type="submit"
+                  [disabled]="CongeForm.invalid">Valider</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- fin AddConge Form -->
+

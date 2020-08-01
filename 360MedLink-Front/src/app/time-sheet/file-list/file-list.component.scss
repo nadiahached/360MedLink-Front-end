@@ -1,0 +1,52 @@
+.sidenav {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-top: 100px;
+}
+
+.sidenav div a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:8em;
+}
+
+.main {
+  margin-left: 15%; /* Same as the width of the sidenav */
+ // font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+a.selected{
+  border: 1px white solid;
+  color:  white;
+}
+
+
+.button_class{
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width:9em;
+}
+
+.alert-class{
+  margin: 30%;
+}

@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.below-header {
+  margin-top: 92px;
+}
+
+.page-content {
+  min-height: 100%;
+
+  /*same measurement as footer */
+  margin-bottom: -220px;
+}
+
+.page-content::after {
+  content: "";
+  display: block;
+}
+
+footer, .page-content::after {
+  height: 220px;
+}
+@media (max-width: 768px) {
+  .page-content {
+    min-height: 100%;
+
+    /*same measurement as footer */
+    margin-bottom: -550px;
+  }
+
+  .page-content::after {
+    content: "";
+    display: block;
+  }
+
+  footer, .page-content::after {
+    height: 550px;
+  }
+}

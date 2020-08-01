@@ -1,0 +1,61 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div class="container nadia">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 ">
+      <div class="text-center mt-5 mb-3">
+        <p class="h2">360WorkPlace</p>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-body ">
+     <img src="../assets/images/logo.png" >
+          <form  [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <label >Adresse Email :</label>
+            <div class="input-group">
+              <input type="email"
+                     formControlName="username"
+                     class="form-control"
+                     id="username"
+                     aria-describedby="emailHelp"
+                     placeholder="Saisir votre adresse email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <small id="emailHelp" class="form-text text-muted mb-3">Nous ne partagerons jamais votre e-mail</small>
+            <label >Mot de passe :</label>
+            <div class="input-group mb-3">
+              <input type="password"
+                     formControlName="password"
+                     id="password"
+                     class="form-control"
+                     placeholder="Saisir votre mot de passe">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-2"></div>
+              <div class="col-8">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Valider</button>
+              </div>
+              <div class="col-2"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4"></div>
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<!-- Bienvenue -->
+<section id="bienvenue" class="py-3">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="text-center">
+        <h3 class="display-3 pt-5">L'historique de paiments </h3>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="bg-light">
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#AddSalary"style="margin-top:10px;margin-right: 40px"
+            (click)="initAddSalary()"> Ajouter un salaire</button>
+  </div>
+  <div class="page-content container-lg py-3">
+    <div class="card shadow-sm">
+      <table class="table table-stripped">
+        <thead class="thead-light">
+        <th scope="col">Id</th>
+        <th scope="col">Date de paiment</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Action</th>
+        <th scope="col">Total</th>
+        </thead>
+        <tbody *ngFor="let salary of UserSalaries">
+        <tr >
+          <td scope="row">{{salary?.id}}</td>
+          <td scope="row">{{salary?.date}}</td>
+          <td scope="row">{{salary.titre}}</td>
+          <td scope="row">{{salary?.salary}}</td>
+          <td scope="row">
+            <button type="button" class="btn btn-danger"(click)="onDeleteSalary(salary.id)">Supprimer</button>
+          </td>
+          <td scope="row"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row">{{getTotalSalarie()}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- AddSalary Form -->
+<div class="modal fade" id="AddSalary" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form   [formGroup]="SalaryForm" (ngSubmit)="onAddSalary()" >
+        <div class="modal-header">
+
+          <h5 class="modal-title" id="SignInFromTitle">Ajouter un salaire</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <br>
+              <label>Date</label>
+              <input  class="form-control"
+                      type="date"
+                      required="required"
+                      formControlName="date" class="form-control"  id="date">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <br>
+              <label >Salaire</label>
+              <input type="text" id="salary"formControlName="salary" class="form-control" placeholder="{{user?.salaire}}">
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-primary btn-block "type="submit"
+                  [disabled]="SalaryForm.invalid">Valider</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

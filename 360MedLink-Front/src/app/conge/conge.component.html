@@ -1,0 +1,107 @@
+<ngx-loading [show]="false"></ngx-loading>
+<!-- Bienvenue -->
+<section id="bienvenue" class="py-3">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="text-center">
+        <h3 class="display-3 pt-5" *ngIf="role==='RH'">Toutes les demandes de congés</h3>
+        <h3 class="display-3 pt-2" *ngIf="role==='MANAGER'">Gérer Toutes les demandes de congés</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="d-flex justify-content-around" style="margin-top: 10%;"*ngIf="conges.length===0" >
+  <div  class="container"style=" margin-right: 20%; margin-left: 20%;">
+    <div class="alert alert-dark" role="alert">
+      <span class="alert-icon"><span class="sr-only">Info</span></span>
+      <div>
+        <h4 class="alert-heading">Notification</h4>
+        <p> Pas de congé pour le moment</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="conges.length!=0">
+  <div class="bg-light" *ngIf="role==='RH'" style="height: 100%">
+    <div class="page-content container-lg py-3">
+
+      <div class="card shadow-sm">
+        <table class="table table-stripped">
+          <thead class="thead-light">
+          <th scope="col">Date du Début</th>
+          <th scope="col">Nombre de jours</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Manager</th>
+          <th scope="col">Accepter</th>
+          </thead>
+          <tbody *ngFor="let conge of conges" >
+          <tr >
+            <td scope="row">{{conge.debutTime}}</td>
+            <td scope="row">{{conge.breJours}}</td>
+            <td scope="row">{{conge.firstName}}</td>
+            <td scope="row">{{conge.secondeName}}</td>
+            <td scope="row">{{conge.titre}}</td>
+            <td scope="row">{{conge.managerName}}</td>
+            <td scope="row"><button class="btn btn-outline-success btn-sm" (click)="onApprouveConge(conge.id)"
+                                    [disabled]="conge.rhApprouvment=='1'">Confirmer la demande <i class="fas fa-check"></i>
+            </button></td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="bg-light" *ngIf="role==='MANAGER'" style="height: 100%">
+  <div class="page-content container-lg py-3">
+
+    <div class="card shadow-sm">
+      <table class="table table-stripped">
+        <thead class="thead-light">
+        <th scope="col">Date du Début</th>
+        <th scope="col">Nombre de jours</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Manager</th>
+        <th scope="col">Etat</th>
+        <th scope="col">Accepter</th>
+        <th scope="col">Refuser</th>
+        </thead>
+        <tbody *ngFor="let conge of conges" >
+        <tr >
+          <td scope="row">{{conge.debutTime}}</td>
+          <td scope="row">{{conge.breJours}}</td>
+          <td scope="row">{{conge.firstName}}</td>
+          <td scope="row">{{conge.secondeName}}</td>
+          <td scope="row">{{conge.titre}}</td>
+          <td scope="row">{{conge.managerName}}</td>
+          <td scope="row">
+            <p *ngIf="conge.status==='En attente'" style="color: orangered">{{conge.status}}</p>
+            <p *ngIf="conge.status==='Approuvé'" style="color: green">{{conge.status}}</p>
+            <p *ngIf="conge.status==='Annulé'" style="color: red">{{conge.status}}</p>
+          </td>
+          <td scope="row"><button class="btn btn-outline-success btn-sm" (click)="onApprouveManagerConge(conge.id,conge.idUser)"
+                                  [disabled]='conge.status==="Approuvé"'>Accepter<i class="fas fa-check"></i>
+          </button></td>
+          <td scope="row"><button class="btn  btn-outline-danger btn-sm" (click)="onBlocManagerConge(conge.id)"
+                                  [disabled]='((conge.status==="Approuvé")||(conge.status==="Annulé"))'>
+            Refuser<i class="fas fa-check"></i>
+          </button></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+</div>

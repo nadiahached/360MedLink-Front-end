@@ -1,0 +1,123 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-around">
+  <div  class="container" id="container">
+    <div>
+      <img src="../../assets/avatar.jpg" alt="" class="rounded float-left">
+    </div>
+    <div style="margin-left:25%">
+
+
+
+
+    </div>
+
+
+    <div class="row" style="margin-left:25%">
+      <div class="col-md-8">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Adresse E-mail</label>
+            </div>
+
+            <div class="col-md-6">
+              <p>{{user?.username}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Prénom</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.firstName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nom</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.secondeName}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Nom du Manager</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.managerName}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Authentification</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{role}}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Date de naissance</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.birthday}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Salaire</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.salaire}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Cin</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.cin}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Rib</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.rib}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Adresse</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.adresse}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Titre</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user?.titre}}</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

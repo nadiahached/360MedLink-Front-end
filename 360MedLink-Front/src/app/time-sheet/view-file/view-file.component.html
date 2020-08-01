@@ -1,0 +1,27 @@
+
+<ngx-loading [show]="loading"	></ngx-loading>
+
+<div class="bg-light" *ngIf="FileData!=null">
+  <div class="page-content container-sm ">
+    <div class="card shadow">
+
+      <table class="table table-stripped">
+        <thead class="thead-light">
+          <th scope="col" *ngFor="let headValue of headData">
+            {{headValue}}
+          </th>
+        </thead>
+        <tbody >
+        <tr  scope="row" *ngFor="let row of data">
+          <td *ngFor="let val of headData; let i =index">
+            {{row[i] || ' '}}
+          </td>
+        </tr>
+        </tbody >
+      </table>
+      <div id="htmlout"></div>
+    </div>
+  </div>
+</div>
+
+

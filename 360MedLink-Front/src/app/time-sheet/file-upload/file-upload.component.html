@@ -1,0 +1,7 @@
+<div class="file-drop-area">
+  <span class="fake-btn">Choisir un fichier</span>
+  <span>{{file ? file.name : 'or drag and drop file here' }}</span>
+
+  <input  class="file-input" type="file" id="file-{{fileSlector}}">
+</div>
+<app-progress [progress]="progress"></app-progress>

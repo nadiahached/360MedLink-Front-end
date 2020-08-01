@@ -1,0 +1,116 @@
+
+<ngx-loading [show]="false"></ngx-loading>
+<div class="cover">
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="text-center mt-1">
+          <p class="h2"></p>
+        </div>
+        <div class="card mt-2 shadow-sm">
+          <div class="card-body">
+            <p class="h1 text-center py-2">Mise à jour d'utilisateur</p>
+            <form class="form-group"  [formGroup]="UserForm" (ngSubmit)="onUpdateUser()">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label>  Nom </label>
+                  <input type="text"
+                         name="Nom"
+                         formControlName="firstName"
+                         class="form-control"
+                         id="firstName"
+                         placeholder="{{user?.firstName}}">
+                </div>
+                <div class="col-lg-6">
+                  <label> Prénom </label>
+                  <input type="text"
+                         id="secondeName"
+                         name="Prénom"
+                         formControlName="secondeName"
+                         class="form-control"
+                         placeholder="{{user?.secondeName}}">
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <br>
+                  <label>Date de naissance</label>
+                  <input  class="form-control"
+                          type="date"
+                          required="required"
+                          formControlName="birthday" class="form-control"  id="birthday">
+                </div>
+                <div class="col-lg-6">
+                  <br>
+                  <label> Salaire </label>
+                  <input type="text"  formControlName="salaire"id="salaire" class="form-control" placeholder="{{user?.salaire}}">
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <br>
+                  <label >Cin</label>
+                  <input type="text" id="cin"formControlName="cin" class="form-control" placeholder="{{user?.cin}}">
+                </div>
+                <div class="col-lg-6">
+                  <br>
+                  <label > Rib : </label>
+                  <input type="text" formControlName="rib" id="rib" class="form-control" placeholder="{{user?.rib}}">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <br>
+                  <label >Contact</label>
+                  <input type="text"formControlName="contact" class="form-control"  id="contact"
+                         placeholder="{{user?.contact}}">
+                </div>
+                <div class="col-lg-6">
+                  <br>
+                  <label >Titre</label>
+                  <select formControlName="titre" class="form-control" id="titre"  placeholder="Saisir le titre du l'employe">
+                    <option value="" disabled selected>Titre</option>
+                    <option value="USER">USER</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="RH">RH</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <br>
+                  <label >Adresse Exacte</label>
+                  <input type="text" id="adresse"formControlName="adresse" class="form-control" placeholder="{{user?.adresse}}">
+                </div>
+                <div class="col-lg-6">
+                  <br>
+                  <label > Choisir le manager  </label>
+
+                  <select formControlName="managerName" class="form-control" id="managerName">
+                    <option value="" disabled selected>nom du manager</option>
+                    <option *ngFor="let manager of managers"  value="{{manager.firstName}}">{{manager.firstName}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <br>
+              <button class="btn btn-primary btn-block "type="submit"
+                      [disabled]="UserForm.invalid">Valider</button>
+
+            </form >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+
+
+    </div>
+  </div>
+
+</div>
+

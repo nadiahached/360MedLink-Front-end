@@ -1,0 +1,81 @@
+<br>
+
+<div [hidden]="hidden">
+
+
+<ngx-loading [show]="loading"	></ngx-loading>
+
+
+  <div class="sidenav">
+
+    <div *ngFor="let file of files">
+      <a *ngIf="selectedFile!=file.id"  (click)="OnselectFile(file.id)">{{file.date}}</a>
+      <a *ngIf="selectedFile===file.id" class="selected" (click)="OnselectFile(file.id)">{{file.date}}</a>
+    </div>
+    <a>
+      <div class="button_class">
+        <button class="btn btn-primary button_class" type="button" data-toggle="collapse"
+                aria-expanded="false" aria-controls="Newform"   data-toggle="modal"
+                data-target="#NewFile">
+          Ajouter un fichier
+        </button>
+      </div>
+    </a>
+  </div>
+
+  <div class="main">
+
+
+    <div class="d-flex justify-content-around" style="margin-top: 15%;" *ngIf="selectedFile===null">
+      <div  class="container"style=" margin-right: 20%; margin-left: 20%;">
+        <div class="alert alert-dark" role="alert">
+          <span class="alert-icon"><span class="sr-only">Info</span></span>
+          <div>
+            <h4 class="alert-heading">Notification.</h4>
+            <p> Veuillez sélectionner le fichier à ouvrir</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-view-file [fileId]=selectedFile></app-view-file>
+  </div>
+
+</div>
+<div class="modal fade" id="NewFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Ajouter un nouveau fichier</h5>
+        <!-- Boosted mod: using visually hidden text instead of aria-label -->
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fas fa-window-close"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="margi: 20px; max-width: 75%;">
+          <form [formGroup]="uploadFile" (ngSubmit)="submitUpload()">
+            <div class="form-group">
+              <label>Date de creation</label>
+              <input type="date" class="form-control" formControlName="date" placeholder="FileName">
+              <div  style="display: block">
+                <ng-container *ngIf="uploadHasError('date','required')">Ce champs est obligatoire</ng-container>
+              </div>
+            </div>
+            <div class="form-group">
+              <app-file-upload formControlName="file" [progress]="progress"></app-file-upload>
+              <div  style="display: block">
+                <ng-container *ngIf="uploadHasError('file','required')">Ce fichier est obligatoire</ng-container>
+                <ng-container *ngIf="uploadHasError('file','requiredFileType')">Only XLS 🤡</ng-container>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary"[disabled]="uploadFile.invalid">Importer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+

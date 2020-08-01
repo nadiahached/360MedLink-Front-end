@@ -1,0 +1,17 @@
+.card:hover {
+  background:#f7f7f7;
+  transform: scale(1.03);
+}
+.card {
+  height: 90%;
+  transition: all 0.2s ease;
+}
+
+
+#filter{
+  margin-top: -20px;
+  position: relative;
+}
+
+
+

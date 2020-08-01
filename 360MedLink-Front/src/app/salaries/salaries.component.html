@@ -1,0 +1,62 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<!-- Bienvenue -->
+<section id="bienvenue" class="py-3">
+  <div class="primary-overlay text-white">
+    <div class="container">
+      <div class="text-center">
+        <h3 class="display-3 pt-5">Votre historique de salaires</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="d-flex justify-content-around" style="margin-top: 10%;"*ngIf="UserSalaries.length===0" >
+  <div  class="container"style=" margin-right: 20%; margin-left: 20%;">
+    <div class="alert alert-dark" role="alert">
+      <span class="alert-icon"><span class="sr-only">Info</span></span>
+      <div>
+        <h4 class="alert-heading">Notification.</h4>
+        <p>Pas de salaires pour le moment</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-light" *ngIf="UserSalaries.length!=0">
+  <div class="page-content container-lg py-3">
+
+    <div class="card shadow-sm">
+      <table class="table table-stripped">
+        <thead class="thead-light">
+        <th scope="col">Id</th>
+        <th scope="col">Date de paiment</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Total</th>
+        </thead>
+        <tbody *ngFor="let salary of UserSalaries">
+        <tr >
+          <td scope="row">{{salary?.id}}</td>
+          <td scope="row">{{salary?.date}}</td>
+          <td scope="row">{{salary.titre}}</td>
+          <td scope="row">{{salary?.salary}}</td>
+          <td scope="row"></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr >
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row">{{getTotalSalarie()}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+

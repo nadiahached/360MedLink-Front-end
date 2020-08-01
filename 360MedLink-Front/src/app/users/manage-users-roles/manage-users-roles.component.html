@@ -1,0 +1,86 @@
+
+<ngx-loading [show]="loading"></ngx-loading>
+<br>
+<br>
+<br>
+<!--navbar-->
+
+<div class="container">
+  <section id="filter" class="shadow p-3 mb-5 bg-white rounded py-1">
+    <div class="container">
+      <div class="blockquote text-center text-muted">
+        Vous pouvez gérer les rôles des utilisateurs
+      </div>
+      <div class="d-flex bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+          <input [(ngModel)]="userName" type="text" class="form-control" placeholder="nom" (keyup.enter)="findUsers()">
+        </div>
+        <div class="p-2 bd-highlight">
+          <div class="row">
+            <button type="button" class="btn btn-light" (click)="findUsers()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="ml-auto p-2 bd-highlight">
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+<!--navbar-->
+
+
+
+<div class="container-fluid" >
+
+  <table id="news-table" class="table tablesorter mb-6 tablesorter-default tablesorter7c3c2b9ca1cc9" role="grid" aria-labelledby="tablesorter7c3c2b9ca1cc9caption">
+    <thead class="cf">
+    <tr role="row" class="tablesorter-headerRow">
+      <th scope="col" class="header tablesorter-header tablesorter-headerUnSorted" data-column="0" tabindex="0" role="columnheader" aria-disabled="false" aria-controls="news-table" unselectable="on" aria-sort="none" aria-label="ID: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>ID</span></div></th>
+      <th scope="col" class="header tablesorter-header tablesorter-headerUnSorted" data-column="1" tabindex="0" role="columnheader" aria-disabled="false" aria-controls="news-table" unselectable="on" aria-sort="none" aria-label="Title: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>Nom</span></div></th>
+      <th scope="col" class="header tablesorter-header tablesorter-headerUnSorted" data-column="2" tabindex="0" role="columnheader" aria-disabled="false" aria-controls="news-table" unselectable="on" aria-sort="none" aria-label="Date: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>Prénom</span></div></th>
+      <th scope="col" class="header tablesorter-header tablesorter-headerUnSorted" data-column="3" tabindex="0" role="columnheader" aria-disabled="false" aria-controls="news-table" unselectable="on" aria-sort="none" aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>Titre</span></div></th>
+      <th scope="col" class="header tablesorter-header tablesorter-headerUnSorted" data-column="4" tabindex="0" role="columnheader" aria-disabled="false" aria-controls="news-table" unselectable="on" aria-sort="none" aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>Authentification</span></div></th>
+      <th scope="col" class="header tablesorter-header sorter-false tablesorter-headerUnSorted" data-column="5" role="columnheader" aria-disabled="true" unselectable="on" aria-sort="none" aria-label="Actions: No sort applied, sorting is disabled" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>Supprimer le rôle</span></div></th>
+      <th scope="col" class="header tablesorter-header sorter-false tablesorter-headerUnSorted" data-column="6" role="columnheader" aria-disabled="true" unselectable="on" aria-sort="none" aria-label="Actions: No sort applied, sorting is disabled" style="user-select: none;">
+      <div class="tablesorter-header-inner"><span>choisir le rôle</span></div></th>
+      <th scope="col" class="header tablesorter-header sorter-false tablesorter-headerUnSorted" data-column="6" role="columnheader" aria-disabled="true" unselectable="on" aria-sort="none" aria-label="Actions: No sort applied, sorting is disabled" style="user-select: none;">
+        <div class="tablesorter-header-inner"><span>ajouter le rôle</span></div></th>
+    </tr>
+    </thead>
+    <tbody aria-live="polite" aria-relevant="all" *ngFor="let user of users">
+    <tr role="row">
+      <td class="align-middle"> <h6> {{user?.id}} </h6></td>
+      <td class="align-middle"><h6> {{user?.firstName}} </h6></td>
+      <td class="align-middle"><h6>{{user?.secondeName}}</h6></td>
+      <td class="align-middle"><h6>{{user?.titre}}</h6></td>
+      <td class="align-middle">{{DisplayRole(user?.roles)}}</td>
+      <td class="align-middle">
+        <button type="button" title="supprimer le role de ce utilisateur" class="btn btn-sm btn-outline-danger"
+        (click)="OndeleteRole(DisplayRole(user?.roles),user.username)">Supprimer</button>
+      </td>
+      <td>
+        <select  class="form-control" placeholder="Saisir le titre du l'employe"(change)="affecRole($event)" >
+          <option value="" disabled selected>Titre</option>
+          <option value="USER">USER</option>
+          <option value="MANAGER">MANAGER</option>
+          <option value="RH">RH</option>
+        </select>
+      </td>
+      <td class="align-middle">
+        <a class="btn btn-sm btn-success" title="ajouter le role" (click)="onAddRole(user.username)">Ajouter</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
